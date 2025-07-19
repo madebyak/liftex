@@ -1,0 +1,35 @@
+{
+  "navigation": {
+    "home": "HOME",
+    "about": "ABOUT",
+    "services": "SERVICES", 
+    "projects": "PROJECTS",
+    "blog": "BLOG",
+    "contact": "CONTACT"
+  },
+  "topNavbar": {
+    "phone": "+964 77 504 04000",
+    "email": "info@liftexelevators.com",
+    "address": "Hay Al-Jamiaa - Baghdad - IRAQ",
+    "language": {
+      "en": "EN",
+      "ar": "عربي"
+    }
+  },
+  "homepage": {
+    "title": "Welcome to Liftex",
+    "subtitle": "Modern web solutions that elevate your digital presence. We create cutting-edge experiences with the latest technologies and best practices.",
+    "cta": {
+      "getStarted": "Get Started",
+      "learnMore": "Learn More"
+    },
+    "moreContent": {
+      "title": "More Content Coming Soon",
+      "description": "We're building something amazing. Stay tuned for updates."
+    }
+  },
+  "metadata": {
+    "title": "Liftex - Modern Web Solutions",
+    "description": "Liftex provides cutting-edge web development solutions, from design to deployment. Specializing in modern web technologies and user-centric experiences."
+  }
+} 
