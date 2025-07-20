@@ -3,10 +3,11 @@ import { notFound } from 'next/navigation';
 import { BlogPostContent } from './sections';
 
 type Props = {
-  params: { locale: string; slug: string };
+  params: Promise<{ locale: string; slug: string }>;
 };
 
-export default function BlogPostPage({ params: { locale, slug } }: Props) {
+export default async function BlogPostPage({ params }: Props) {
+  const { locale, slug } = await params;
   setRequestLocale(locale);
 
   // Validate slug exists (you can expand this with actual data validation)

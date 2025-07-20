@@ -156,7 +156,7 @@ export const ContactFormSection: React.FC = () => {
               "space-y-8",
               isRTL ? "lg:order-2" : "lg:order-1"
             )}
-            animation="fadeInLeft"
+            direction="left"
           >
             <motion.div
               variants={staggerContainer}
@@ -438,7 +438,7 @@ export const ContactFormSection: React.FC = () => {
               "space-y-8",
               isRTL ? "lg:order-1" : "lg:order-2"
             )}
-            animation="fadeInRight"
+            direction="right"
           >
             <motion.div
               variants={staggerContainer}

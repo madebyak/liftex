@@ -2,10 +2,11 @@ import { setRequestLocale } from 'next-intl/server';
 import { HeroSection, BlogGridSection } from './sections';
 
 type Props = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
-export default function BlogPage({ params: { locale } }: Props) {
+export default async function BlogPage({ params }: Props) {
+  const { locale } = await params;
   setRequestLocale(locale);
 
   return (

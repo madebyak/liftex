@@ -2,10 +2,11 @@ import { setRequestLocale } from 'next-intl/server';
 import { HeroSection, ContactFormSection, BuildSection } from './sections';
 
 type Props = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
-export default function ContactPage({ params: { locale } }: Props) {
+export default async function ContactPage({ params }: Props) {
+  const { locale } = await params;
   setRequestLocale(locale);
 
   return (
