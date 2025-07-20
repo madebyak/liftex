@@ -1,5 +1,12 @@
-import { HomePage } from "@/components/pages";
+import { HeroSection, AboutSection, WhySection, HomeProductsSection } from './home/sections';
 
-export default function Home() {
-  return <HomePage />;
+export default function HomePage() {
+  return (
+    <div className="home-page">
+      <HeroSection />
+      <AboutSection />
+      <WhySection />
+      <HomeProductsSection />
+    </div>
+  );
 }

@@ -8,10 +8,34 @@ import { Container } from "./Container";
 import { NavbarProps } from "@/types";
 import { cn } from "@/lib/utils";
 
+// Animated Navigation Link Component with Wipe Effects
+interface AnimatedNavLinkProps {
+  href: string;
+  children: React.ReactNode;
+  isRTL: boolean;
+}
+
+const AnimatedNavLink: React.FC<AnimatedNavLinkProps> = ({ href, children, isRTL }) => {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "nav-link-wipe px-3 py-2 text-sm font-medium relative overflow-hidden",
+        isRTL ? "nav-link-rtl" : "nav-link-ltr"
+      )}
+    >
+      <span className="relative z-10">
+        {children}
+      </span>
+    </Link>
+  );
+};
+
 export function Navbar({ className }: NavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const t = useTranslations('navigation');
   const locale = useLocale();
+  const isRTL = locale === 'ar';
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -60,20 +84,16 @@ export function Navbar({ className }: NavbarProps) {
   const DesktopNavigation = (
     <div className={cn(
       "hidden lg:flex lg:items-center",
-      locale === 'ar' ? "lg:space-x-reverse lg:space-x-8" : "lg:space-x-8"
+      isRTL ? "lg:space-x-reverse lg:space-x-8" : "lg:space-x-8"
     )}>
       {navigationItems.map((item) => (
-        <Link
+        <AnimatedNavLink
           key={item.href}
           href={item.href}
-          className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors duration-200 relative group"
+          isRTL={isRTL}
         >
           {item.name}
-          <span className={cn(
-            "absolute bottom-0 w-0 h-0.5 bg-gray-900 transition-all duration-200 group-hover:w-full",
-            locale === 'ar' ? "right-0" : "left-0"
-          )}></span>
-        </Link>
+        </AnimatedNavLink>
       ))}
     </div>
   );
@@ -118,7 +138,7 @@ export function Navbar({ className }: NavbarProps) {
       <Container>
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Conditional rendering based on locale */}
-          {locale === 'ar' ? (
+          {isRTL ? (
             <>
               {/* RTL: Navigation first (left), Logo last (right) */}
               {DesktopNavigation}

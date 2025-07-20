@@ -28,6 +28,112 @@
       "description": "We're building something amazing. Stay tuned for updates."
     }
   },
+  "hero": {
+    "title": "ELEVATOR EXPERTS IN IRAQ",
+    "subtitle": "Professional elevator installation, maintenance, and modernization services across Iraq"
+  },
+  "about": {
+    "title": "About Liftex",
+    "headline": "Built on Expertise, Driven by Experience",
+    "description": "For two generations we've transformed bold architectural ideas into smooth, silent vertical journeys. Whether it's a micro‑lift in a tight shaft or a statement glass capsule soaring through an atrium, Liftex blends precision engineering, rock‑solid safety, and design freedom—so every ride feels as refined as the building around it.",
+    "buttons": {
+      "services": "OUR SERVICES",
+      "about": "ABOUT US"
+    }
+  },
+  "why": {
+    "headline": "Why Liftex?",
+    "subheading": "Two generations of lift engineers, refining craft since the 1990s.\nFrom micro‑lifts for tight shafts to statement glass panoramics.\nEN81‑20/50 compliant, redundant braking, 24 / 7 remote monitoring."
+  },
+  "homeProducts": {
+    "title": "OUR PRODUCTS",
+    "headline": "Designed for Movement. Built for People.",
+    "subheading": "At Liftex, we create lift solutions that blend engineering precision with thoughtful design. Our products include lift solutions for homes, commercial buildings, industrial sites, and service environments.\n\nWe work closely with architects, developers, and property owners to match the right product with the right space. We don't stop at installation, every lift we deliver comes with personalised service, technical support, and maintenance options designed for your long-term needs.",
+    "categories": [
+      {
+        "title": "Residential & Boutique",
+        "image": "/imgs/schindler-villa-lift-hero.jpg",
+        "products": [
+          {
+            "title": "Custom Home Lifts",
+            "description": "Discreet shafts, silent rides, and interiors that match your penthouse palette."
+          },
+          {
+            "title": "Micro‑Lift™",
+            "description": "When every centimetre counts: payloads up to 250 kg in shafts < 900 mm wide."
+          }
+        ]
+      },
+      {
+        "title": "Commercial & Public",
+        "image": "/imgs/luxury-lift.png",
+        "products": [
+          {
+            "title": "Luxury Passenger Lifts",
+            "description": "Up to 2,000 kg, 4 m/s. Glass, marble, or titanium‑clad cabins that wow tenants."
+          },
+          {
+            "title": "Panoramic Glass Lifts",
+            "description": "360° views with laminated, low‑iron glass and vibration‑damped frames."
+          },
+          {
+            "title": "Heavy‑Duty Freight",
+            "description": "Platform sizes to 5 × 3 m, loads to 5 t. Fork‑friendly thresholds, anti‑slip steel decks."
+          },
+          {
+            "title": "Escalators & Moving Walks",
+            "description": "Smooth, silent, energy‑smart. Optional LED balustrades and antiviral handrails."
+          }
+        ]
+      },
+      {
+        "title": "Lifecycle Care",
+        "image": "/imgs/maintaince-01.jpg",
+        "description": "Design & BIM integration with your architect's workflow. Off‑site fabrication in controlled environments. Installation & testing by IRATA‑trained technicians. Platinum Maintenance Plans – 2‑hour response, IoT diagnostics. Modernisation – controller swaps, door operators, cabin refits."
+      }
+    ]
+  },
+  "footer": {
+    "menu": {
+      "title": "Menu",
+      "links": {
+        "about": "About",
+        "projects": "Projects", 
+        "services": "Services",
+        "blog": "News + Insights",
+        "contact": "Contact"
+      }
+    },
+    "connect": {
+      "title": "Connect",
+      "social": {
+        "linkedin": "LinkedIn",
+        "instagram": "Instagram"
+      }
+    },
+    "contact": {
+      "title": "Contact",
+      "phone": "+964 77 504 04000",
+      "email": "info@liftexelevators.com",
+      "address": "Hay Al-Jamiaa - Baghdad - IRAQ"
+    },
+    "contactForm": {
+      "title": "Get in Touch",
+      "fields": {
+        "firstName": "First Name*",
+        "lastName": "Last Name*", 
+        "email": "Email*",
+        "phone": "Phone Number*",
+        "message": "Message*"
+      },
+      "button": "Send Message"
+    },
+    "legal": {
+      "terms": "Terms & Conditions",
+      "privacy": "Privacy Policy",
+      "branding": "© 2025 Liftex. All rights reserved."
+    }
+  },
   "metadata": {
     "title": "Liftex - Modern Web Solutions",
     "description": "Liftex provides cutting-edge web development solutions, from design to deployment. Specializing in modern web technologies and user-centric experiences."

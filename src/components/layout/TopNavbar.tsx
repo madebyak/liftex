@@ -33,7 +33,7 @@ export function TopNavbar({ className }: TopNavbarProps) {
 
   return (
     <div className={cn(
-      "bg-gray-900 text-white py-1 md:py-1.5 text-xs border-b border-gray-800 fixed top-0 left-0 right-0 z-50",
+      "bg-black text-white py-1 md:py-1.5 text-xs border-b border-gray-700 fixed top-0 left-0 right-0 z-50",
       className
     )}>
       <Container>
