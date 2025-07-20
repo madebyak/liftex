@@ -45,6 +45,50 @@
     "headline": "Why Liftex?",
     "subheading": "Two generations of lift engineers, refining craft since the 1990s.\nFrom micro‑lifts for tight shafts to statement glass panoramics.\nEN81‑20/50 compliant, redundant braking, 24 / 7 remote monitoring."
   },
+  "aboutPage": {
+    "hero": {
+      "label": "ABOUT",
+      "headline": "Elevate More Than Floors"
+    },
+    "whoWeAre": {
+      "headline": "Who We Are",
+      "description": "Liftex is more than just a company — it's the continuation of a story that started back in the 1990s, when a group of passionate engineers began building a reputation for reliable, high-quality elevator solutions. Today, we're the second generation carrying that legacy forward, with fresh energy, modern thinking, and a deep respect for the values we inherited.\nBased in Baghdad, we've grown from a small operation into a trusted name in vertical mobility by focusing on people. For us, every project is about building trust, solving problems, and delivering more than expected."
+    },
+    "mission": {
+      "headline": "Our Mission",
+      "description": "We believe that true expertise doesn't just deliver a lift — it improves the entire experience, from the first conversation to long after installation."
+    },
+    "leadership": {
+      "headline": "Our Leadership",
+      "description": "Liftex is led by the new generation of a family that's been in this industry for over 30 years. We were raised in this field, learning from the ground up — and now we're bringing a fresh perspective to how elevator services should be done.\nWe don't just follow the standard way of doing things — we challenge it."
+    },
+    "culture": {
+      "headline": "Our Culture",
+      "intro": "At Liftex, we've always believed that how you do things is just as important as what you do. That's why we operate with a strong set of values that guide every interaction, every design, and every decision:",
+      "values": [
+        {
+          "title": "Precision & Safety",
+          "description": "We're serious about the technical side. Every detail matters, and safety always comes first."
+        },
+        {
+          "title": "Integrity",
+          "description": "No hidden costs, no vague promises. Just clear, honest communication and real commitment."
+        },
+        {
+          "title": "Innovation & Luxury",
+          "description": "We help clients think beyond the standard. Whether it's a sleek design or a one-of-a-kind structure, we make elevators that elevate buildings."
+        },
+        {
+          "title": "Client-Centric Mindset",
+          "description": "You're not just a client — you're a partner. We make sure the final result reflects your needs, your space, and your taste."
+        },
+        {
+          "title": "Respect & Collaboration",
+          "description": "Inside the company, we work like a team. Outside, we treat clients and partners with the respect and attention they deserve."
+        }
+      ]
+    }
+  },
   "homeProducts": {
     "title": "OUR PRODUCTS",
     "headline": "Designed for Movement. Built for People.",
@@ -137,5 +181,138 @@
   "metadata": {
     "title": "Liftex - Modern Web Solutions",
     "description": "Liftex provides cutting-edge web development solutions, from design to deployment. Specializing in modern web technologies and user-centric experiences."
+  },
+  "servicesPage": {
+    "hero": {
+      "label": "SERVICES",
+      "headline": "Excellence in Every Movement",
+      "subline": "From installation to modernization, we deliver comprehensive elevator solutions that exceed expectations and ensure seamless vertical mobility."
+    },
+    "services": {
+      "headline": "Our Core Services",
+      "subheading": "Three decades of experience, refined into comprehensive service offerings",
+      "installation": {
+        "title": "Installation",
+        "description": "Complete elevator installation from consultation to commissioning, using cutting-edge technology and precision engineering for optimal performance."
+      },
+      "modernisation": {
+        "title": "Modernisation", 
+        "description": "Transform existing elevators with state-of-the-art systems, improving efficiency, safety, and aesthetics while extending operational life."
+      },
+      "maintenance": {
+        "title": "Maintenance & Support",
+        "description": "Comprehensive maintenance programs with 24/7 monitoring, preventive care, and rapid response to ensure uninterrupted vertical mobility."
+      }
+    }
+  },
+  "contactPage": {
+    "hero": {
+      "label": "CONTACT",
+      "headline": "LET'S WORK TOGETHER",
+      "subline": "Ready to elevate your project? Get in touch with our team and let's create something extraordinary together."
+    },
+    "form": {
+      "title": "Send us a message",
+      "fields": {
+        "firstName": {
+          "label": "First name",
+          "placeholder": "Enter your first name",
+          "required": "First name is required"
+        },
+        "lastName": {
+          "label": "Last name", 
+          "placeholder": "Enter your last name",
+          "required": "Last name is required"
+        },
+        "businessEmail": {
+          "label": "Business email",
+          "placeholder": "Enter your business email",
+          "required": "Business email is required",
+          "invalid": "Please enter a valid email address"
+        },
+        "company": {
+          "label": "Company",
+          "placeholder": "Enter your company name",
+          "required": "Company name is required"
+        },
+        "message": {
+          "label": "Message/enquiry",
+          "placeholder": "Tell us about your project or enquiry...",
+          "required": "Message is required"
+        }
+      },
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent successfully!",
+      "error": "Failed to send message. Please try again.",
+      "privacy": {
+        "text": "By submitting this form, you agree to our",
+        "link": "Privacy Policy",
+        "and": "and",
+        "terms": "Terms of Service"
+      }
+    },
+    "contactDetails": {
+      "title": "Get in touch",
+      "phone": {
+        "label": "Phone",
+        "value": "+964 77 504 04000"
+      },
+      "email": {
+        "label": "Email",
+        "value": "info@liftexelevators.com"
+      },
+      "address": {
+        "label": "Address",
+        "value": "Hay Al-Jamiaa, Baghdad, Iraq"
+      },
+      "hours": {
+        "label": "Business Hours",
+        "value": "Sunday - Thursday: 8:00 AM - 6:00 PM"
+      }
+    },
+    "buildSection": {
+      "headline": "BUILD SMARTER",
+      "subline": "Ready to transform your vertical mobility experience?",
+      "cta": "Start Your Project"
+    }
+  },
+  "blogPage": {
+    "hero": {
+      "label": "BLOG",
+      "headline": "Stay informed. Stay inspired.",
+      "subline": "From elevator innovations and safety tips to design ideas and industry trends — our blog is where expertise meets conversation. You might be a property owner, an architect, or just a customer who's interested — either way, you'll find something valuable here.\n\nExplore our latest articles and discover how Liftex is helping shape the future of lift solutions in Iraq."
+    },
+    "articles": [
+      {
+        "id": "modernising-old-elevators",
+        "title": "Modernising Old Elevators: How to Upgrade Without Starting Over",
+        "excerpt": "Elevators are one of the most important yet overlooked systems in a building. Learn how modernisation can breathe new life into your existing system without starting from scratch.",
+        "readTime": "5 min read",
+        "category": "Modernisation",
+        "date": "2024-01-15",
+        "image": "/imgs/image-04.jpg"
+      },
+      {
+        "id": "elevator-solutions-iraq",
+        "title": "Elevator Solutions in Iraq: Challenges and Opportunities",
+        "excerpt": "As Iraq enters a new era of rebuilding and expansion, vertical mobility is becoming more essential than ever. Explore the challenges and opportunities in Iraq's growing market.",
+        "readTime": "7 min read",
+        "category": "Industry Insights",
+        "date": "2024-01-10",
+        "image": "/imgs/hero-02.jpg"
+      },
+      {
+        "id": "lift-maintenance-signs",
+        "title": "Top 5 Signs Your Building Needs a Lift Maintenance Check",
+        "excerpt": "By knowing what signs to look for, you can catch problems early and take action before they lead to serious safety hazards or expensive repairs.",
+        "readTime": "4 min read",
+        "category": "Maintenance",
+        "date": "2024-01-05",
+        "image": "/imgs/maintaince-01.jpg"
+      }
+    ],
+    "readMore": "Read More",
+    "backToBlog": "Back to Blog"
   }
 } 
