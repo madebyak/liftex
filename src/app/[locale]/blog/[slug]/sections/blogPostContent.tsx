@@ -84,7 +84,7 @@ export const BlogPostContent: React.FC<BlogPostContentProps> = ({ slug }) => {
   const articleContent = getArticleContent(slug);
 
   return (
-    <article className="py-20 lg:py-32" dir={isRTL ? 'rtl' : 'ltr'}>
+    <article className="py-20 lg:py-32 bg-white" dir={isRTL ? 'rtl' : 'ltr'}>
       <Container>
         
         {/* Back to Blog Link */}

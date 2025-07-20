@@ -75,6 +75,14 @@ export const scaleIn: Variants = {
       ease: [0.25, 0.25, 0.25, 0.75],
     },
   },
+  hover: {
+    scale: 1.02,
+    y: -4,
+    transition: {
+      duration: 0.4,
+      ease: [0.25, 0.46, 0.45, 0.94],
+    },
+  },
 };
 
 export const scaleInUp: Variants = {

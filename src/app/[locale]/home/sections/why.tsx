@@ -138,24 +138,6 @@ export const WhySection: React.FC = () => {
                   />
                 </motion.div>
 
-                {/* Floating badge */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ delay: 1, duration: 0.6 }}
-                  viewport={{ once: true }}
-                  className={cn(
-                    "absolute top-6 bg-white/90 backdrop-blur-sm px-6 py-3 rounded-lg shadow-lg",
-                    isRTL ? "right-6" : "left-6"
-                  )}
-                >
-                  <span className={cn(
-                    "text-sm font-medium text-black",
-                    isRTL ? "font-arabic" : "font-inter"
-                  )}>
-                    {isRTL ? "الجودة العالية" : "Premium Quality"}
-                  </span>
-                </motion.div>
               </motion.div>
 
               {/* Two Column Images */}
@@ -195,21 +177,6 @@ export const WhySection: React.FC = () => {
                     />
                   </motion.div>
 
-                  {/* Floating number */}
-                  <motion.div
-                    initial={{ opacity: 0, rotate: -180 }}
-                    whileInView={{ opacity: 1, rotate: 0 }}
-                    transition={{ delay: 1.2, duration: 0.8, type: "spring" }}
-                    viewport={{ once: true }}
-                    className="absolute bottom-4 right-4 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg"
-                  >
-                    <span className={cn(
-                      "text-lg font-bold text-black",
-                      isRTL ? "font-arabic" : "font-inter"
-                    )}>
-                      01
-                    </span>
-                  </motion.div>
                 </motion.div>
 
                 {/* Second Column Image */}
@@ -240,21 +207,6 @@ export const WhySection: React.FC = () => {
                     />
                   </motion.div>
 
-                  {/* Floating number */}
-                  <motion.div
-                    initial={{ opacity: 0, rotate: 180 }}
-                    whileInView={{ opacity: 1, rotate: 0 }}
-                    transition={{ delay: 1.4, duration: 0.8, type: "spring" }}
-                    viewport={{ once: true }}
-                    className="absolute bottom-4 right-4 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg"
-                  >
-                    <span className={cn(
-                      "text-lg font-bold text-black",
-                      isRTL ? "font-arabic" : "font-inter"
-                    )}>
-                      02
-                    </span>
-                  </motion.div>
                 </motion.div>
 
               </motion.div>

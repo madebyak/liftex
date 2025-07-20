@@ -59,7 +59,7 @@ export const BlogGridSection: React.FC = () => {
                 key={article.id}
                 variants={scaleIn}
                 whileHover="hover"
-                className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500"
+                className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl"
               >
                 <Link href={`/blog/${article.id}`}>
                   
