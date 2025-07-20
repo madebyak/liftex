@@ -18,29 +18,11 @@ export const CultureSection: React.FC = () => {
   const locale = useLocale();
   const isRTL = locale === 'ar';
 
-  // Get the values array
-  const values = [
-    {
-      title: t('values.0.title'),
-      description: t('values.0.description')
-    },
-    {
-      title: t('values.1.title'),
-      description: t('values.1.description')
-    },
-    {
-      title: t('values.2.title'),
-      description: t('values.2.description')
-    },
-    {
-      title: t('values.3.title'),
-      description: t('values.3.description')
-    },
-    {
-      title: t('values.4.title'),
-      description: t('values.4.description')
-    }
-  ];
+  // Get the values array from translation
+  const values = t.raw('aboutPage.culture.values') as Array<{
+    title: string;
+    description: string;
+  }>;
 
   return (
     <section className="py-20 lg:py-32 bg-black text-white relative overflow-hidden" dir={isRTL ? 'rtl' : 'ltr'}>

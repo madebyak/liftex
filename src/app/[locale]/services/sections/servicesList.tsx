@@ -23,23 +23,20 @@ export const ServicesListSection: React.FC = () => {
   // Get services data
   const services = [
     {
-      title: t('services.0.title'),
-      headline: t('services.0.headline'),
-      description: t('services.0.description'),
+      title: t('services.installation.title'),
+      description: t('services.installation.description'),
       image: '/imgs/about/Commercial-glass-elevator-e1589738199508.jpg.webp',
       number: '01'
     },
     {
-      title: t('services.1.title'),
-      headline: t('services.1.headline'),
-      description: t('services.1.description'),
+      title: t('services.modernisation.title'),
+      description: t('services.modernisation.description'),
       image: '/imgs/luxury-lift.png',
       number: '02'
     },
     {
-      title: t('services.2.title'),
-      headline: t('services.2.headline'),
-      description: t('services.2.description'),
+      title: t('services.maintenance.title'),
+      description: t('services.maintenance.description'),
       image: '/imgs/maintaince-01.jpg',
       number: '03'
     }
@@ -111,17 +108,7 @@ export const ServicesListSection: React.FC = () => {
                       {service.title}
                     </motion.h3>
                     
-                    <div className="overflow-hidden">
-                      <motion.h2 
-                        variants={textReveal}
-                        className={cn(
-                          "text-4xl md:text-5xl lg:text-6xl font-medium text-orange-500 leading-tight",
-                          isRTL ? "font-arabic" : "font-inter"
-                        )}
-                      >
-                        {service.headline}
-                      </motion.h2>
-                    </div>
+
                   </motion.div>
 
                   {/* Service Description */}
