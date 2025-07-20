@@ -19,7 +19,7 @@ export const CultureSection: React.FC = () => {
   const isRTL = locale === 'ar';
 
   // Get the values array from translation
-  const values = t.raw('aboutPage.culture.values') as Array<{
+  const values = t.raw('values') as Array<{
     title: string;
     description: string;
   }>;
