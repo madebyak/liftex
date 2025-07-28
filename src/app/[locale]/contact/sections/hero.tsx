@@ -23,7 +23,7 @@ export const HeroSection: React.FC = () => {
       initial="hidden"
       animate="visible"
       variants={staggerContainer}
-      className="relative min-h-screen bg-white flex items-center justify-center" 
+              className="relative min-h-screen bg-white flex items-center justify-center navbar-spacing" 
       dir={isRTL ? 'rtl' : 'ltr'}
     >
       <Container>

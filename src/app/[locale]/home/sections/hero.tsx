@@ -2,186 +2,164 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import anime from 'animejs';
+import { gsap } from 'gsap';
 import { cn } from '@/lib/utils';
 
-// Uncover class - exactly like the reference
-interface UncoverOptions {
-  covered?: boolean;
-  slicesTotal?: number;
-  slicesColor?: string;
-  orientation?: 'vertical' | 'horizontal';
-  slicesOrigin?: {
-    show: 'top' | 'bottom' | 'left' | 'right';
-    hide: 'top' | 'bottom' | 'left' | 'right';
+/** Direction constants */
+const NEXT = 1;
+const PREV = -1;
+
+/**
+ * Demo6 Slideshow Class - Based on the inspiration effect
+ * Manages slideshow functionality with stretch/slide animation.
+ */
+class Demo6Slideshow {
+  /**
+   * Holds references to relevant DOM elements.
+   */
+  DOM: {
+    el: HTMLElement;
+    slides: HTMLElement[];
+    slidesInner: HTMLElement[];
   };
-}
+  
+  /**
+   * Index of the current slide being displayed.
+   */
+  current = 0;
+  
+  /**
+   * Total number of slides.
+   */
+  slidesTotal = 0;
+  
+  /**  
+   * Flag to indicate if an animation is running.
+   */
+  isAnimating = false;
 
-interface AnimationSettings {
-  slices?: Record<string, unknown>;
-  image?: Record<string, unknown>;
-}
-
-class Uncover {
-  DOM: { el: HTMLElement; img?: HTMLElement; slices: HTMLElement[] };
-  options: UncoverOptions;
-  isCovered: boolean;
-  slicesTotal: number;
-
-  constructor(el: HTMLElement, options: UncoverOptions = {}) {
-    this.DOM = { el, slices: [] };
-    this.options = {
-      covered: true,
-      slicesTotal: 4,
-      slicesColor: '#111',
-      orientation: 'vertical',
-      slicesOrigin: { show: 'top', hide: 'bottom' },
-      ...options
+  /**
+   * Slideshow constructor.
+   * Initializes the slideshow and sets up the DOM elements.
+   */
+  constructor(DOM_el: HTMLElement) {
+    // Initialize DOM elements
+    this.DOM = {
+      el: DOM_el,
+      slides: [...DOM_el.querySelectorAll('.slide')] as HTMLElement[],
+      slidesInner: []
     };
-    this.isCovered = this.options.covered!;
-    this.slicesTotal = 0;
-    this.layout();
-    if (!this.isCovered) {
-      this.show();
-    }
-  }
+    
+    this.DOM.slidesInner = this.DOM.slides.map(item => 
+      item.querySelector('.slide__img') as HTMLElement
+    );
 
-  layout() {
-    this.DOM.el.classList.add('uncover');
-    let inner = '';
-    inner += `<div class="uncover__img" style='background-image: ${this.DOM.el.style.backgroundImage}'></div>
-              <div class="uncover__slices uncover__slices--${this.options.orientation}">`;
-    for (let i = 0; i < this.options.slicesTotal!; i++) {
-      inner += `<div class="uncover__slice" style="color:${this.options.slicesColor}"></div>`;
-    }
-    inner += `</div>`;
-    this.DOM.el.innerHTML = inner;
-    this.DOM.img = this.DOM.el.querySelector('.uncover__img') as HTMLElement;
-    this.DOM.slices = Array.from(this.DOM.el.querySelectorAll('.uncover__slice'));
-    this.slicesTotal = this.DOM.slices.length;
-  }
-
-  show(animation = false, animationSettings: AnimationSettings = {}) {
-    if (!this.isCovered) return Promise.resolve();
-    return this.toggle(animation, animationSettings);
-  }
-
-  hide(animation = false, animationSettings: AnimationSettings = {}) {
-    if (this.isCovered) return Promise.resolve();
-    return this.toggle(animation, animationSettings);
-  }
-
-  toggle(animation: boolean, animationSettings: AnimationSettings = {}) {
-    this.isCovered = !this.isCovered;
-    if (!animation) {
-      this.DOM.slices.forEach((slice) => {
-        slice.style.transform = !this.isCovered
-          ? this.options.orientation === 'vertical' ? 'translateY(100%)' : 'translateX(100%)'
-          : 'none';
-      });
-      return Promise.resolve();
-    } else {
-      const settings = {
-        slices: {
-          targets: this.DOM.slices,
-          duration: 800,
-          delay: (_: unknown, i: number) => i * 80,
-          easing: 'easeInOutQuint',
-          translateX: this.options.orientation === 'vertical' ? '0%' : 
-            !this.isCovered ? 
-              this.options.slicesOrigin!.show === 'right' ? '100%' : '-100%' :
-              this.options.slicesOrigin!.hide === 'right' ? ['100%', '0%'] : ['-100%', '0%'],
-          translateY: this.options.orientation === 'vertical' ? 
-            !this.isCovered ? 
-              this.options.slicesOrigin!.show === 'bottom' ? '100%' : '-100%' :
-              this.options.slicesOrigin!.hide === 'bottom' ? ['100%', '0%'] : ['-100%', '0%']
-            : '0%'
-        },
-        image: {
-          targets: this.DOM.img,
-          ...((animationSettings.image || {}) as Record<string, unknown>)
-        }
-      };
-
-      Object.assign(settings.slices, animationSettings.slices || {});
-
-      anime.remove(this.DOM.slices);
-      if (this.DOM.img) anime.remove(this.DOM.img);
-
-      const promises = [anime(settings.slices).finished];
-      if ((settings.image as Record<string, unknown>).duration) {
-        promises.push(anime(settings.image).finished);
-      }
-      return Promise.all(promises);
-    }
-  }
-}
-
-// Simple Slideshow - exactly like Demo 1
-class Slideshow {
-  DOM: { el: HTMLElement; slides: HTMLElement[] };
-  slidesTotal: number;
-  current: number;
-  uncoverItems: Uncover[];
-  isAnimating: boolean;
-
-  constructor(el: HTMLElement) {
-    this.DOM = { el, slides: [] };
-    this.DOM.slides = Array.from(this.DOM.el.querySelectorAll('.slide'));
-    this.slidesTotal = this.DOM.slides.length;
-    this.current = 0;
-    this.uncoverItems = [];
-    this.isAnimating = false;
-
-    // Demo 1 configuration - only the first one
-    const uncoverOpts: UncoverOptions = {
-      slicesTotal: 4,
-      slicesColor: '#111',
-      orientation: 'vertical',
-      slicesOrigin: { show: 'top', hide: 'bottom' }
-    };
-
-    this.DOM.slides.forEach((slide) => {
-      const img = slide.querySelector('.slide__img') as HTMLElement;
-      this.uncoverItems.push(new Uncover(img, uncoverOpts));
-    });
-
-    this.init();
-  }
-
-  init() {
-    this.isAnimating = true;
+    // Set initial slide as current
     this.DOM.slides[this.current].classList.add('slide--current');
-    this.uncoverItems[this.current].show(true, {
-      image: {
-        duration: 800,
-        delay: 350,
-        easing: 'easeOutCirc',
-        scale: [1.3, 1]
-      }
-    }).then(() => this.isAnimating = false);
+
+    // Count total slides
+    this.slidesTotal = this.DOM.slides.length;
   }
 
-  navigate(pos: number) {
-    if (this.isAnimating || this.current === pos || pos < 0 || pos > this.slidesTotal - 1) return;
+  /**
+   * Navigate to the next slide.
+   */
+  next() {
+    this.navigate(NEXT);
+  }
+
+  /**
+   * Navigate to the previous slide.
+   */
+  prev() {
+    this.navigate(PREV);
+  }
+
+  /**
+   * Navigate to a specific slide position.
+   */
+  navigateToSlide(position: number) {
+    if (this.isAnimating || this.current === position || position < 0 || position > this.slidesTotal - 1) {
+      return false;
+    }
+    
+    const direction = position > this.current ? NEXT : PREV;
+    const previous = this.current;
+    this.current = position;
+    
+    this.performAnimation(direction, previous);
+    return true;
+  }
+
+  /**
+   * Navigate through slides with direction.
+   */
+  navigate(direction: number) {
+    // Check if animation is already running
+    if (this.isAnimating) return false;
+    
+    // Update the current slide index based on direction
+    const previous = this.current;
+    this.current = direction === 1 ?
+      this.current < this.slidesTotal - 1 ? ++this.current : 0 :
+      this.current > 0 ? --this.current : this.slidesTotal - 1;
+
+    this.performAnimation(direction, previous);
+    return true;
+  }
+
+  /**
+   * Perform the slide animation using GSAP
+   */
+  private performAnimation(direction: number, previous: number) {
     this.isAnimating = true;
 
-    this.uncoverItems[this.current].hide(true).then(() => {
-      this.DOM.slides[this.current].classList.remove('slide--current');
-      this.current = pos;
+    // Get the current and upcoming slides and their inner elements
+    const currentSlide = this.DOM.slides[previous];
+    const currentInner = this.DOM.slidesInner[previous];
+    const upcomingSlide = this.DOM.slides[this.current];
+    const upcomingInner = this.DOM.slidesInner[this.current];
 
-      const newItem = this.uncoverItems[this.current];
-      newItem.hide();
+    // Animation sequence using GSAP - Demo6 effect
+    gsap
+      .timeline({
+        defaults: {
+          duration: 1.6,
+          ease: 'power3.inOut'
+        },
+        onStart: () => {
+          // Add class to the upcoming slide to mark it as current
       this.DOM.slides[this.current].classList.add('slide--current');
-      newItem.show(true, {
-        image: {
-          duration: 800,
-          delay: 350,
-          easing: 'easeOutCirc',
-          scale: [1.3, 1]
+        },
+        onComplete: () => {
+          // Remove class from the previous slide to unmark it as current
+          this.DOM.slides[previous].classList.remove('slide--current');
+          // Reset animation flag
+          this.isAnimating = false;
         }
-      }).then(() => this.isAnimating = false);
-    });
+      })
+      // Defining animation steps
+      .addLabel('start', 0)
+      .to(currentSlide, {
+        xPercent: -direction * 100
+      }, 'start')
+      .to(currentInner, {
+        transformOrigin: direction === NEXT ? '100% 50%' : '0% 50%',
+        scaleX: 4
+      }, 'start')
+      .fromTo(upcomingSlide, {
+        xPercent: direction * 100
+      }, {
+        xPercent: 0
+      }, 'start')
+      .fromTo(upcomingInner, {
+        transformOrigin: direction === NEXT ? '0% 50%' : '100% 50%',
+        xPercent: -direction * 100,
+        scaleX: 4
+      }, {
+        xPercent: 0,
+        scaleX: 1
+      }, 'start');
   }
 }
 
@@ -192,7 +170,7 @@ export const HeroSection: React.FC = () => {
   const slidesRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [progress, setProgress] = useState(0);
-  const slideshowRef = useRef<Slideshow | null>(null);
+  const slideshowRef = useRef<Demo6Slideshow | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const heroImages = [
@@ -204,8 +182,8 @@ export const HeroSection: React.FC = () => {
   useEffect(() => {
     if (!slidesRef.current) return;
 
-    // Initialize slideshow
-    slideshowRef.current = new Slideshow(slidesRef.current);
+    // Initialize Demo6 slideshow
+    slideshowRef.current = new Demo6Slideshow(slidesRef.current);
 
     // Progress bar animation
     let startTime = Date.now();
@@ -224,9 +202,8 @@ export const HeroSection: React.FC = () => {
     intervalRef.current = setInterval(() => {
       const slideshow = slideshowRef.current;
       if (slideshow && !slideshow.isAnimating) {
-        const nextPos = (slideshow.current + 1) % heroImages.length;
-        slideshow.navigate(nextPos);
-        setCurrentSlide(nextPos);
+        slideshow.next();
+        setCurrentSlide(slideshow.current);
         setProgress(0);
         startTime = Date.now();
         updateProgress();
@@ -239,19 +216,46 @@ export const HeroSection: React.FC = () => {
   }, [heroImages.length]);
 
   const handlePaginationClick = (pos: number) => {
-    if (slideshowRef.current && slidesRef.current) {
-      // Update slide--current class manually to match original demo
-      const slides = slidesRef.current.querySelectorAll('.slide');
-      slides.forEach((slide, index) => {
-        if (index === pos) {
-          slide.classList.add('slide--current');
-        } else {
-          slide.classList.remove('slide--current');
+    if (slideshowRef.current) {
+      const success = slideshowRef.current.navigateToSlide(pos);
+      if (success) {
+        setCurrentSlide(pos);
+        setProgress(0);
+        
+        // Restart the progress animation
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+          let startTime = Date.now();
+          const updateProgress = () => {
+            const elapsed = Date.now() - startTime;
+            const progressPercent = (elapsed / 6000) * 100;
+            setProgress(Math.min(progressPercent, 100));
+            
+            if (progressPercent < 100) {
+              requestAnimationFrame(updateProgress);
+            }
+          };
+          updateProgress();
+          
+          intervalRef.current = setInterval(() => {
+            const slideshow = slideshowRef.current;
+            if (slideshow && !slideshow.isAnimating) {
+              slideshow.next();
+              setCurrentSlide(slideshow.current);
+              setProgress(0);
+              startTime = Date.now();
+              updateProgress();
+            }
+          }, 6000);
         }
-      });
-      
-      slideshowRef.current.navigate(pos);
-      setCurrentSlide(pos);
+      }
+    }
+  };
+
+  const handlePrevSlide = () => {
+    if (slideshowRef.current) {
+      slideshowRef.current.prev();
+      setCurrentSlide(slideshowRef.current.current);
       setProgress(0);
       
       // Restart the progress animation
@@ -271,21 +275,44 @@ export const HeroSection: React.FC = () => {
         
         intervalRef.current = setInterval(() => {
           const slideshow = slideshowRef.current;
-          if (slideshow && !slideshow.isAnimating && slidesRef.current) {
-            const nextPos = (slideshow.current + 1) % heroImages.length;
-            
-            // Update slide--current class for auto-advance
-            const slides = slidesRef.current.querySelectorAll('.slide');
-            slides.forEach((slide, index) => {
-              if (index === nextPos) {
-                slide.classList.add('slide--current');
-              } else {
-                slide.classList.remove('slide--current');
-              }
-            });
-            
-            slideshow.navigate(nextPos);
-            setCurrentSlide(nextPos);
+          if (slideshow && !slideshow.isAnimating) {
+            slideshow.next();
+            setCurrentSlide(slideshow.current);
+            setProgress(0);
+            startTime = Date.now();
+            updateProgress();
+          }
+        }, 6000);
+      }
+    }
+  };
+
+  const handleNextSlide = () => {
+    if (slideshowRef.current) {
+      slideshowRef.current.next();
+      setCurrentSlide(slideshowRef.current.current);
+      setProgress(0);
+      
+      // Restart the progress animation
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        let startTime = Date.now();
+        const updateProgress = () => {
+          const elapsed = Date.now() - startTime;
+          const progressPercent = (elapsed / 6000) * 100;
+          setProgress(Math.min(progressPercent, 100));
+          
+          if (progressPercent < 100) {
+            requestAnimationFrame(updateProgress);
+          }
+        };
+        updateProgress();
+        
+        intervalRef.current = setInterval(() => {
+          const slideshow = slideshowRef.current;
+          if (slideshow && !slideshow.isAnimating) {
+            slideshow.next();
+            setCurrentSlide(slideshow.current);
             setProgress(0);
             startTime = Date.now();
             updateProgress();
@@ -297,76 +324,110 @@ export const HeroSection: React.FC = () => {
 
   return (
     <main className="relative w-full h-screen overflow-hidden">
-      {/* CSS matching original demo structure */}
+      {/* CSS for Demo6 slideshow effect */}
       <style jsx global>{`
-        /* Slides structure matching original demo */
+        /* Demo6 Slides structure */
         .slides {
-          position: absolute;
           width: 100%;
-          height: 100%;
-          top: 0;
-          left: 0;
+          height: 100vh;
+          overflow: hidden;
+          display: grid;
+          grid-template-rows: 100%;
+          grid-template-columns: 100%;
+          place-items: center;
         }
+
         .slide {
-          position: absolute;
           width: 100%;
           height: 100%;
-          top: 0;
-          left: 0;
+          grid-area: 1 / 1 / -1 / -1;
+          pointer-events: none;
           opacity: 0;
-          visibility: hidden;
+          overflow: hidden;
+          position: relative;
+          display: grid;
+          place-items: center;
+          will-change: transform, opacity;
         }
+
         .slide--current {
+          pointer-events: auto;
           opacity: 1;
-          visibility: visible;
         }
+
         .slide__img {
-          position: absolute;
-          top: 0;
-          left: 0;
           width: 100%;
           height: 100%;
           background-size: cover;
           background-position: 50% 50%;
           background-repeat: no-repeat;
+          will-change: transform, opacity, filter;
         }
         
-        /* Slice animation CSS */
-        .uncover {
-          overflow: hidden;
-          background-image: none !important;
-          position: relative;
-        }
-        .uncover__img {
-          width: 100%;
-          height: 100%;
-          background-size: cover;
-          background-position: 50% 50%;
-        }
-        .uncover__slices {
-          width: 100%;
-          height: 100%;
+        /* Navigation arrows styling */
+        .nav-arrow {
           position: absolute;
-          top: 0;
-          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 20;
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 50%;
+          width: 60px;
+          height: 60px;
           display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          color: white;
+          font-size: 18px;
+          font-weight: bold;
         }
-        .uncover__slices--vertical {
-          flex-direction: row;
+
+        .nav-arrow:hover {
+          background: rgba(255, 255, 255, 0.2);
+          border-color: rgba(255, 255, 255, 0.4);
+          transform: translateY(-50%) scale(1.1);
         }
-        .uncover__slices--horizontal {
-          flex-direction: column;
+
+        .nav-arrow:active {
+          transform: translateY(-50%) scale(0.95);
         }
-        .uncover__slice {
-          color: #fff;
-          background-color: currentColor;
-          flex: 1;
+
+        .nav-arrow--prev {
+          left: 20px;
         }
-        .uncover__slices--vertical .uncover__slice {
-          box-shadow: 1px 0 0 currentColor;
+
+        .nav-arrow--next {
+          right: 20px;
         }
-        .uncover__slices--horizontal .uncover__slice {
-          box-shadow: 0 1px 0 currentColor;
+
+        /* Mobile responsiveness for arrows */
+        @media (max-width: 768px) {
+          .nav-arrow {
+            width: 50px;
+            height: 50px;
+            font-size: 16px;
+          }
+          
+          .nav-arrow--prev {
+            left: 10px;
+          }
+
+          .nav-arrow--next {
+            right: 10px;
+          }
+        }
+
+        /* Touch support for mobile */
+        @media (hover: none) and (pointer: coarse) {
+          .nav-arrow:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-50%);
+          }
         }
         
         /* RTL Support for progress bar */
@@ -376,9 +437,32 @@ export const HeroSection: React.FC = () => {
         [dir="ltr"] .origin-left {
           transform-origin: left;
         }
+
+        /* RTL Support for navigation arrows */
+        [dir="rtl"] .nav-arrow--prev {
+          right: 20px;
+          left: auto;
+        }
+
+        [dir="rtl"] .nav-arrow--next {
+          left: 20px;
+          right: auto;
+        }
+
+        @media (max-width: 768px) {
+          [dir="rtl"] .nav-arrow--prev {
+            right: 10px;
+            left: auto;
+          }
+
+          [dir="rtl"] .nav-arrow--next {
+            left: 10px;
+            right: auto;
+          }
+        }
       `}</style>
 
-      {/* Background Slides - Following original demo structure exactly */}
+      {/* Background Slides - Demo6 structure */}
       <div className="slides" ref={slidesRef}>
         {heroImages.map((image, index) => (
           <div 
@@ -393,37 +477,58 @@ export const HeroSection: React.FC = () => {
         ))}
       </div>
 
-      {/* Hero Content Structure - Account for fixed navbar height */}
+      {/* Navigation Arrows */}
+      <button 
+        className={cn(
+          "nav-arrow nav-arrow--prev",
+          isRTL && "rtl-prev"
+        )}
+        onClick={isRTL ? handleNextSlide : handlePrevSlide}
+        aria-label={isRTL ? "Next slide" : "Previous slide"}
+      >
+        {isRTL ? "→" : "←"}
+      </button>
+      
+      <button 
+        className={cn(
+          "nav-arrow nav-arrow--next", 
+          isRTL && "rtl-next"
+        )}
+        onClick={isRTL ? handlePrevSlide : handleNextSlide}
+        aria-label={isRTL ? "Previous slide" : "Next slide"}
+      >
+        {isRTL ? "←" : "→"}
+      </button>
+
+      {/* Hero Content Structure - Centered and properly aligned */}
       <div className="absolute inset-0 z-10 flex flex-col">
         
         {/* Navbar spacing */}
-        <div className="h-24"></div>
+        <div className="h-20 md:h-24"></div>
         
-        {/* Main Content Container - Centered in remaining space */}
-        <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8" dir={isRTL ? 'rtl' : 'ltr'}>
-          <div className={cn(
-            "space-y-6 w-full max-w-6xl",
-            isRTL ? "text-right" : "text-left"
-          )}>
+        {/* Main Content Container - Perfectly centered */}
+        <div className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-7xl w-full">
             
-            {/* Container 1: Headline */}
-            <div>
+            {/* Headline - Center aligned */}
+            <div className="mb-6 sm:mb-8">
               <h1 className={cn(
-                "text-white font-medium leading-tight tracking-wide text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl break-words sm:whitespace-nowrap",
+                "text-white font-medium leading-tight tracking-wide",
+                "text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl",
+                "mx-auto text-center",
                 isRTL ? "font-arabic" : "font-inter"
               )}>
                 {t('title')}
               </h1>
             </div>
 
-            {/* Container 2: Subheading */}
-            <div className={cn(
-              "flex",
-              isRTL ? "justify-end" : "justify-start"
-            )}>
+            {/* Subheading - Center aligned */}
+            <div className="flex justify-center">
               <p className={cn(
-                "text-white/95 font-normal leading-tight text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl max-w-4xl px-4",
-                isRTL ? "font-arabic text-right" : "font-inter text-left"
+                "text-white/95 font-normal leading-relaxed text-center",
+                "text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl",
+                "max-w-4xl mx-auto px-2 sm:px-4",
+                isRTL ? "font-arabic" : "font-inter"
               )}>
                 {t('subtitle')}
               </p>
@@ -432,30 +537,28 @@ export const HeroSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Container 3: Navigation (Pagination + Progress Bar) - Full Width */}
-        <div className="pb-0 sm:pb-0lg:pb-0" dir={isRTL ? 'rtl' : 'ltr'}>
+        {/* Navigation Container - Full Width at Bottom */}
+        <div className="pb-6 sm:pb-8 lg:pb-10">
           
-          {/* Pagination Dots - Centered with padding, RTL-aware */}
+          {/* Pagination Dots - Centered */}
           <div className="flex items-center justify-center gap-3 mb-4 px-4 sm:px-6 lg:px-8">
-            {(isRTL ? [...heroImages].reverse() : heroImages).map((_, originalIndex) => {
-              const index = isRTL ? heroImages.length - 1 - originalIndex : originalIndex;
-              return (
+            {heroImages.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => handlePaginationClick(index)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ease-in-out ${
+                className={cn(
+                  "w-2 h-2 rounded-full transition-all duration-300 ease-in-out",
                     index === currentSlide 
                       ? 'bg-white scale-150' 
                       : 'bg-white/40 hover:bg-white/70 hover:scale-125'
-                  }`}
+                )}
                   aria-label={`Go to slide ${index + 1}`}
                 />
-              );
-            })}
+            ))}
           </div>
 
-          {/* Progress Bar - True Full Width Edge to Edge, RTL-aware */}
-          <div className={`flex w-full h-0.5 ${isRTL ? 'flex-row-reverse' : ''}`}>
+          {/* Progress Bar - Full Width */}
+          <div className={cn("flex w-full h-0.5", isRTL ? 'flex-row-reverse' : '')}>
             {(isRTL ? [...heroImages].reverse() : heroImages).map((_, originalIndex) => {
               const index = isRTL ? heroImages.length - 1 - originalIndex : originalIndex;
               return (
@@ -464,9 +567,10 @@ export const HeroSection: React.FC = () => {
                   className="flex-1 bg-white/20 relative overflow-hidden"
                 >
                   <div 
-                    className={`absolute inset-y-0 bg-white transition-none ${
+                    className={cn(
+                      "absolute inset-y-0 bg-white transition-none",
                       isRTL ? 'right-0 origin-right' : 'left-0 origin-left'
-                    }`}
+                    )}
                     style={{
                       width: '100%',
                       transform: index === currentSlide 

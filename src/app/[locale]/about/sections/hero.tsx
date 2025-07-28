@@ -24,7 +24,7 @@ export const AboutHeroSection: React.FC = () => {
       initial="hidden"
       animate="visible"
       variants={staggerContainer}
-      className="relative w-full h-screen overflow-hidden" 
+      className="relative w-full h-screen overflow-hidden navbar-spacing" 
       dir={isRTL ? 'rtl' : 'ltr'}
     >
       <div className="flex h-full">

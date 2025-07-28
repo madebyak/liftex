@@ -25,7 +25,7 @@ export const WhySection: React.FC = () => {
   const subheadingLines = t('subheading').split('\n');
 
   return (
-    <section className="bg-black py-16 lg:py-24 relative overflow-hidden" dir={isRTL ? 'rtl' : 'ltr'}>
+    <section className="bg-black py-16 lg:py-24 relative overflow-hidden overflow-x-hidden" dir={isRTL ? 'rtl' : 'ltr'}>
       
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-5">

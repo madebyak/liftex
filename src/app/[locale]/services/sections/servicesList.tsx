@@ -43,7 +43,7 @@ export const ServicesListSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 lg:py-32" dir={isRTL ? 'rtl' : 'ltr'}>
+    <section className="bg-black py-20 lg:py-32" dir={isRTL ? 'rtl' : 'ltr'}>
       <div className="container mx-auto px-6 lg:px-8">
         
         <div className="space-y-32 lg:space-y-40">
