@@ -176,7 +176,9 @@ export const HeroSection: React.FC = () => {
   const heroImages = [
     '/imgs/hero01.jpg',
     '/imgs/hero-02.jpg',
-    '/imgs/hero-03.jpg'
+    '/imgs/hero-03.jpg',
+    '/imgs/hero05.jpg',
+    '/imgs/hero-06.jpg'
   ];
 
   useEffect(() => {

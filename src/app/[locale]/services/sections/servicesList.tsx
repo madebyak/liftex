@@ -37,7 +37,7 @@ export const ServicesListSection: React.FC = () => {
     {
       title: t('services.maintenance.title'),
       description: t('services.maintenance.description'),
-      image: '/imgs/maintaince-01.jpg',
+      image: '/imgs/maintiaince-04.jpg',
       number: '03'
     }
   ];

@@ -13,6 +13,7 @@ interface ParallaxImageProps {
   fill?: boolean;
   sizes?: string;
   priority?: boolean;
+  objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
 }
 
 export const ParallaxImage: React.FC<ParallaxImageProps> = ({
@@ -24,6 +25,7 @@ export const ParallaxImage: React.FC<ParallaxImageProps> = ({
   fill = true,
   sizes,
   priority = false,
+  objectFit = 'cover',
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -45,7 +47,7 @@ export const ParallaxImage: React.FC<ParallaxImageProps> = ({
           src={src}
           alt={alt}
           fill={fill}
-          className="object-cover"
+          className={`object-${objectFit}`}
           sizes={sizes}
           priority={priority}
         />

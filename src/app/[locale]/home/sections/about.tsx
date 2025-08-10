@@ -33,7 +33,7 @@ export const AboutSection: React.FC = () => {
               <ScrollReveal
                 direction="right"
                 className={cn(
-                  "space-y-6 lg:w-1/2",
+                  "space-y-6 lg:w-2/5",
                   "text-right"
                 )}
               >
@@ -104,12 +104,12 @@ export const AboutSection: React.FC = () => {
               </ScrollReveal>
 
               {/* Image Column - Second in RTL */}
-              <ScrollReveal direction="left" delay={0.2} className="lg:w-1/2 flex-shrink-0">
+              <ScrollReveal direction="left" delay={0.2} className="lg:w-3/5 flex-shrink-0">
                 <motion.div
                   initial="rest"
                   whileHover="hover"
                   variants={imageHover}
-                  className="relative aspect-[3/4] lg:aspect-[4/5] overflow-hidden rounded-lg group"
+                  className="relative aspect-[3/4] lg:aspect-[3/4] overflow-hidden rounded-lg group"
                 >
                   <ParallaxImage
                     src="/imgs/about-img-01.jpg"
@@ -118,6 +118,7 @@ export const AboutSection: React.FC = () => {
                     speed={0.3}
                     scale={false}
                     priority
+                    objectFit="contain"
                   />
                   
                   {/* Hover overlay */}
@@ -133,12 +134,12 @@ export const AboutSection: React.FC = () => {
           ) : (
             <>
               {/* Image Column - First in LTR */}
-              <ScrollReveal direction="left" className="lg:w-1/2 flex-shrink-0">
+              <ScrollReveal direction="left" className="lg:w-3/5 flex-shrink-0">
                 <motion.div
                   initial="rest"
                   whileHover="hover"
                   variants={imageHover}
-                  className="relative aspect-[3/4] lg:aspect-[4/5] overflow-hidden rounded-lg group"
+                  className="relative aspect-[3/4] lg:aspect-[3/4] overflow-hidden rounded-lg group"
                 >
                   <ParallaxImage
                     src="/imgs/about-img-01.jpg"
@@ -147,6 +148,7 @@ export const AboutSection: React.FC = () => {
                     speed={0.3}
                     scale={false}
                     priority
+                    objectFit="contain"
                   />
                   
                   {/* Hover overlay */}
@@ -163,7 +165,7 @@ export const AboutSection: React.FC = () => {
               <ScrollReveal
                 direction="right"
                 delay={0.2}
-                className="space-y-6 lg:w-1/2 text-left"
+                className="space-y-6 lg:w-2/5 text-left"
               >
                 <motion.div 
                   variants={staggerContainer}

@@ -132,10 +132,38 @@
       },
       {
         "title": "Lifecycle Care",
-        "image": "/imgs/maintaince-01.jpg",
+        "image": "/imgs/maintaince-03.jpg",
         "description": "Design & BIM integration with your architect's workflow. Off‑site fabrication in controlled environments. Installation & testing by IRATA‑trained technicians. Platinum Maintenance Plans – 2‑hour response, IoT diagnostics. Modernisation – controller swaps, door operators, cabin refits."
       }
     ]
+  },
+  "projectsPage": {
+    "comingSoon": {
+      "label": "Coming Soon",
+      "title": "Amazing Projects on the Horizon",
+      "subtitle": "We're working on something extraordinary. Our upcoming projects showcase will feature innovative elevator solutions, cutting-edge installations, and transformative modernization projects across Iraq.",
+      "features": [
+        "Residential Tower Installations",
+        "Commercial Complex Modernizations", 
+        "Historic Building Renovations",
+        "Smart Building Integrations"
+      ],
+      "notification": {
+        "title": "Get Notified",
+        "description": "Be the first to explore our project portfolio when it launches.",
+        "placeholder": "Enter your email address",
+        "button": "Notify Me",
+        "success": "Thank you! We'll notify you when our projects page is ready."
+      },
+      "meanwhile": {
+        "title": "Meanwhile, Explore Our",
+        "links": {
+          "services": "Services",
+          "about": "About Us",
+          "contact": "Contact"
+        }
+      }
+    }
   },
   "footer": {
     "menu": {
