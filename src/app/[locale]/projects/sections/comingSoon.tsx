@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { Container } from '@/components/layout/Container';
 import { ButtonMain } from '@/components/ui';
 import { cn } from '@/lib/utils';
-import { ScrollReveal } from '@/components/common';
+import { ScrollReveal, BackgroundAnimation } from '@/components/common';
 import { 
   fadeInUp, 
   fadeInLeft, 
@@ -217,31 +217,7 @@ export const ComingSoonSection: React.FC = () => {
           </ScrollReveal>
 
           {/* Animated Background Elements */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {[...Array(6)].map((_, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ 
-                  opacity: [0, 0.1, 0],
-                  scale: [0, 1, 0],
-                  x: [0, 100, 200],
-                  y: [0, -50, -100]
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  delay: i * 2,
-                  ease: "easeInOut"
-                }}
-                className="absolute w-4 h-4 bg-black rounded-full"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
-              />
-            ))}
-          </div>
+          <BackgroundAnimation />
 
         </motion.div>
       </Container>

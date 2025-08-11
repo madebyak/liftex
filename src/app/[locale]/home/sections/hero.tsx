@@ -406,20 +406,10 @@ export const HeroSection: React.FC = () => {
           right: 20px;
         }
 
-        /* Mobile responsiveness for arrows */
+        /* Hide arrows on mobile to prevent text overlap */
         @media (max-width: 768px) {
           .nav-arrow {
-            width: 50px;
-            height: 50px;
-            font-size: 16px;
-          }
-          
-          .nav-arrow--prev {
-            left: 10px;
-          }
-
-          .nav-arrow--next {
-            right: 10px;
+            display: none;
           }
         }
 
@@ -451,17 +441,7 @@ export const HeroSection: React.FC = () => {
           right: auto;
         }
 
-        @media (max-width: 768px) {
-          [dir="rtl"] .nav-arrow--prev {
-            right: 10px;
-            left: auto;
-          }
 
-          [dir="rtl"] .nav-arrow--next {
-            left: 10px;
-            right: auto;
-          }
-        }
       `}</style>
 
       {/* Background Slides - Demo6 structure */}

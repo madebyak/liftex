@@ -4,7 +4,7 @@ import React from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { ParallaxImage } from '@/components/common';
+import { ParallaxImage, BackgroundAnimation } from '@/components/common';
 import { 
   fadeInUp, 
   fadeInLeft, 
@@ -131,6 +131,9 @@ export const AboutHeroSection: React.FC = () => {
           />
         </motion.div>
       </motion.div>
+
+      {/* Animated Background Elements */}
+      <BackgroundAnimation />
 
     </motion.section>
   );

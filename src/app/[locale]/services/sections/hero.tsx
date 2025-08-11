@@ -4,6 +4,7 @@ import React from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { BackgroundAnimation } from '@/components/common';
 import { 
   fadeInUp, 
   fadeInLeft, 
@@ -150,6 +151,9 @@ export const ServicesHeroSection: React.FC = () => {
           />
         </motion.div>
       </motion.div>
+
+      {/* Animated Background Elements */}
+      <BackgroundAnimation />
 
     </motion.section>
   );

@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Container } from '@/components/layout';
+import { BackgroundAnimation } from '@/components/common';
 import { 
   fadeInUp, 
   fadeInLeft, 
@@ -155,6 +156,9 @@ export const HeroSection: React.FC = () => {
           className="w-1 h-1 bg-gray-400 rounded-full"
         />
       </motion.div>
+
+      {/* Animated Background Elements */}
+      <BackgroundAnimation />
 
     </motion.section>
   );
