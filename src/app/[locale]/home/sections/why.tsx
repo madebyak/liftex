@@ -39,7 +39,7 @@ export const WhySection: React.FC = () => {
             repeat: Infinity,
             ease: "linear"
           }}
-          className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-white to-transparent rounded-full -translate-x-48 -translate-y-48"
+          className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-white to-transparent rounded-full -translate-x-32 -translate-y-48"
         />
         <motion.div 
           animate={{
@@ -51,7 +51,7 @@ export const WhySection: React.FC = () => {
             repeat: Infinity,
             ease: "linear"
           }}
-          className="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-tl from-white to-transparent rounded-full translate-x-40 translate-y-40"
+          className="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-tl from-white to-transparent rounded-full translate-x-20 translate-y-40"
         />
       </div>
 
